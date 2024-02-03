@@ -48,7 +48,6 @@ export default {
   methods: {
     async onSubmit (values) {
       await register(values)
-      // this.$toast.success('注册成功')
       Toast.success({
         message: '注册成功',
         forbidClick: true

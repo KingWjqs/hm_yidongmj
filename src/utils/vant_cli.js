@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { Cascader, Button, Popup, Field, DatetimePicker, Tabbar, TabbarItem, Form, NavBar, Toast } from 'vant'
+import { Cascader, Button, Popup, Field, DatetimePicker, Tabbar, TabbarItem, Form, NavBar, Toast, Cell } from 'vant'
 
 Vue.use(Cascader)
 Vue.use(Button)
@@ -12,3 +12,4 @@ Vue.use(Form)
 Vue.use(Field)
 Vue.use(NavBar)
 Vue.use(Toast)
+Vue.use(Cell)

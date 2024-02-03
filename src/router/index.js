@@ -8,6 +8,8 @@ import Article from '@/views/Article'
 import Collect from '@/views/Collect'
 import Like from '@/views/Like'
 import User from '@/views/User'
+import { gettoken } from '@/utils/storange'
+import { Toast } from 'vant'
 
 Vue.use(VueRouter)
 
@@ -17,8 +19,9 @@ const routes = [
   {
     path: '/',
     component: Layout,
+    redirect: '/article',
     children: [
-      { path: 'article', component: Article },
+      { path: '/article', component: Article },
       { path: 'collect', component: Collect },
       { path: 'like', component: Like },
       { path: 'user', component: User }
@@ -30,6 +33,15 @@ const routes = [
 const router = new VueRouter({
   routes,
   mode: 'history'
+})
+
+const WhiteList = ['/login', '/register']
+router.beforeEach((to, from, next) => {
+  const token = gettoken()
+  if (token) return next()
+  if (WhiteList.includes(to.path)) return next()
+  Toast('请先登录')
+  next('/login')
 })
 
 export default router
