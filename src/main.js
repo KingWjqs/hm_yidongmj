@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-
+// import axios from 'axios'
+import '@/utils/vant_cli'
 Vue.config.productionTip = false
 
 new Vue({
