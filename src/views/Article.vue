@@ -1,25 +1,67 @@
 <template>
   <div class="article-page">
     <nav class="my-nav van-hairline--bottom">
-      <a href="javascript:;">推荐</a>
-      <a href="javascript:;">最新</a>
+      <a href="javascript:;" @click="activeIndex = 0" :class="{active: activeIndex === 0}">推荐</a>
+      <a href="javascript:;" @click="activeIndex = 1" :class="{active: activeIndex === 1}">最新</a>
       <div class="logo"><img src="@/assets/logo.png" alt="" /></div>
     </nav>
-
-    <article-item/>
-    <article-item/>
-    <article-item/>
-    <article-item/>
+    <keep-alive>
+      <van-list
+        @load="onload"
+        v-model="loading"
+        :finished="finished"
+        finished-text="到底了"
+      >
+        <article-item
+          @click.native="getarticleiteminfo(ele.id)"
+          v-for="ele in list"
+          :key="ele.id"
+          :ele="ele"
+        />
+      </van-list>
+    </keep-alive>
   </div>
 </template>
 
 <script>
+import { articleitem } from '@/api/article'
 export default {
   name: 'ArticlePage',
   data () {
-    return {}
+    return {
+      list: [],
+      loading: false,
+      finished: false,
+      activeIndex: 0,
+      obj: {
+        current: 1,
+        sorter: 'weight_desc'
+      }
+    }
   },
-  methods: {}
+  methods: {
+    getarticleiteminfo (id) {
+      this.$router.push(`/detail/${id}`)
+    },
+    async onload () {
+      const d = await articleitem(this.obj)
+      this.list.push(...d.data.rows)
+      this.obj.current++
+      this.loading = false
+      if (d.data.total === this.list.length) {
+        this.finished = true
+      }
+    }
+  },
+  watch: {
+    activeIndex (newval) {
+      this.obj.sorter = this.activeIndex === 0 ? 'weight_desc' : null
+      this.list = []
+      this.obj.current = 1
+      this.loading = true
+      this.onload()
+    }
+  }
 }
 </script>
 

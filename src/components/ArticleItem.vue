@@ -1,25 +1,34 @@
 <template>
-  <van-cell class="article-item">
-    <div class="head">
-      <img
-        src="http://teachoss.itheima.net/heimaQuestionMiniapp/%E5%AE%98%E6%96%B9%E9%BB%98%E8%AE%A4%E5%A4%B4%E5%83%8F%402x.png"
-        alt=""
-      />
-      <div class="con">
-        <p class="title van-ellipsis">宇宙头条校招前端面经</p>
-        <p class="other">不风流怎样倜傥 | 2022-01-20 00-00-00</p>
+  <div>
+    <van-cell class="article-item">
+      <div class="head">
+        <img :src="ele.avatar" alt="" />
+        <div class="con">
+          <p class="title van-ellipsis">{{ ele.stem }}</p>
+          <p class="other">{{ ele.creator }} | {{ ele.createdAt }}</p>
+        </div>
       </div>
-    </div>
-    <div class="body van-multi-ellipsis--l2">
-      笔者读大三, 前端小白一枚, 正在准备春招, 人生第一次面试, 投了头条前端,
-      总共经历了四轮技术面试和一轮hr面, 不多说, 直接上题&nbsp;一面
-    </div>
-    <div class="foot">点赞 46 | 浏览 332</div>
-  </van-cell>
+      <div class="body van-multi-ellipsis--l2">{{removeHTMLTags(ele.content)}}</div>
+      <div class="foot">点赞 {{ ele.likeCount }} | 浏览 {{ ele.views }}</div>
+    </van-cell>
+  </div>
 </template>
 
 <script>
-export default {}
+export default {
+  name: 'ArticleItem',
+  props: {
+    ele: {
+      type: Object,
+      required: true
+    }
+  },
+  methods: {
+    removeHTMLTags (str) {
+      return str.replace(/<[^>]*>/g, '')
+    }
+  }
+}
 </script>
 
 <style lang='less' scoped>

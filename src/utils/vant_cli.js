@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { Cascader, Button, Popup, Field, DatetimePicker, Tabbar, TabbarItem, Form, NavBar, Toast, Cell } from 'vant'
+import { Cascader, Button, Popup, Field, DatetimePicker, Tabbar, TabbarItem, Form, NavBar, Toast, Cell, List, Icon, Grid, GridItem, CellGroup, Dialog } from 'vant'
 
 Vue.use(Cascader)
 Vue.use(Button)
@@ -13,3 +13,9 @@ Vue.use(Field)
 Vue.use(NavBar)
 Vue.use(Toast)
 Vue.use(Cell)
+Vue.use(List)
+Vue.use(Icon)
+Vue.use(Grid)
+Vue.use(GridItem)
+Vue.use(CellGroup)
+Vue.use(Dialog)

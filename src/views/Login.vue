@@ -47,12 +47,11 @@ export default {
   methods: {
     async onSubmit (values) {
       const res = await login(values)
-      console.log(res)
       Toast.success({
         message: '登录成功',
         forbidClick: true
       })
-      settoken(res.data.data.token)
+      settoken(res.data.token)
       setTimeout(() => {
         this.$router.push('/')
       }, 2000)
